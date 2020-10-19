@@ -9,15 +9,9 @@ read in the html
 
 ``` r
 url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+
 drug_use_html = read_html(url)
-
-drug_use_html
 ```
-
-    ## {html_document}
-    ## <html lang="en">
-    ## [1] <head>\n<link rel="P3Pv1" href="http://www.samhsa.gov/w3c/p3p.xml">\n<tit ...
-    ## [2] <body>\r\n\r\n<noscript>\r\n<p>Your browser's Javascript is off. Hyperlin ...
 
 extract tibble; focus on the first one
 
@@ -51,3 +45,36 @@ table_marj
     ## #   `18-25(P Value)` <chr>, `26+(2013-2014)` <chr>, `26+(2014-2015)` <chr>,
     ## #   `26+(P Value)` <chr>, `18+(2013-2014)` <chr>, `18+(2014-2015)` <chr>,
     ## #   `18+(P Value)` <chr>
+
+## Star Wars movie info
+
+(<https://www.imdb.com/list/ls070150896/>)
+
+``` r
+url = "https://www.imdb.com/list/ls070150896/"
+
+swm_html = read_html(url)
+```
+
+``` r
+title_vec = 
+  swm_html %>%
+  html_nodes(css = ".lister-item-header a") %>% 
+  html_text()
+
+gross_rev_vec = 
+  swm_html %>%
+  html_nodes(".text-small:nth-child(7) span:nth-child(5)") %>%
+  html_text()
+
+runtime_vec = 
+  swm_html %>%
+  html_nodes(".runtime") %>%
+  html_text()
+
+swm_df = 
+  tibble(
+    title = title_vec,
+    rev = gross_rev_vec,
+    runtime = runtime_vec)
+```

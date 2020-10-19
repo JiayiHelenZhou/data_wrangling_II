@@ -97,6 +97,25 @@ str_detect(string_vec, "\\[")
 
 ##Thoughts on Factors
 
+```{r}
+vec_sex = factor(c("male", "male", "female", "female"))
+
+vec_sex
+
+# convert the levels to numbers
+as.numeric(vec_sex)
+```
+
+Relevel
+
+```{r}
+vec_sex = fct_relevel(vec_sex, "male")
+
+vec_sex
+
+as.numeric(vec_sex)
+```
+
 
 
 

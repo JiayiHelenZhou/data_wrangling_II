@@ -107,6 +107,18 @@ brfss_smart2010 =
   content("parsed")
 ```
 
+## Some data are nor so nice
+
+Pokemon
+
+```{r}
+poke = 
+  GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
+
+poke$height
+poke$abilities
+```
 
 
 
